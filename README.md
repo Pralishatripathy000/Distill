@@ -95,18 +95,71 @@ streamlit run app.py
 
 ---
 
-## Project Structure
-
-```
 distill/
-├── data/                  # raw and processed catalogue data
-├── embeddings/            # embedding generation & FAISS index build
-├── detection/             # duplicate clustering + attribute mismatch rules
-├── agent/                 # RAG pipeline + correction generation
-├── evaluation/            # precision/recall/F1 scoring against ground truth
-├── app.py                 # Streamlit demo
-└── requirements.txt
-```
+├── .github/
+│   └── workflows/
+│       └── ci.yml                  # lint + test on push
+│
+├── configs/
+│   ├── config.yaml                 # thresholds, model names, paths
+│   └── .env.example                # API key template
+│
+├── data/
+│   ├── raw/                        # original catalogue dataset (untouched)
+│   ├── processed/                  # cleaned + noise-injected catalogue
+│   └── ground_truth/               # synthetic duplicate labels for eval
+│
+├── src/
+│   └── distill/
+│       ├── __init__.py
+│       ├── ingestion/
+│       │   ├── __init__.py
+│       │   └── loader.py           # dataset loading + validation
+│       ├── embeddings/
+│       │   ├── __init__.py
+│       │   ├── encoder.py          # sentence-transformer wrapper
+│       │   └── index.py            # FAISS index build/query
+│       ├── detection/
+│       │   ├── __init__.py
+│       │   ├── clustering.py       # duplicate/near-duplicate clustering
+│       │   └── rules.py            # attribute + price mismatch checks
+│       ├── agent/
+│       │   ├── __init__.py
+│       │   ├── retriever.py        # ChromaDB retrieval logic
+│       │   ├── generator.py        # Groq LLM correction + justification
+│       │   └── prompts.py          # prompt templates, versioned
+│       ├── evaluation/
+│       │   ├── __init__.py
+│       │   └── metrics.py          # precision/recall/F1 scoring
+│       └── pipeline.py             # end-to-end orchestration
+│
+├── app/
+│   ├── streamlit_app.py            # interactive demo
+│   └── assets/                     # demo screenshots, logo, GIF
+│
+├── notebooks/
+│   ├── 01_eda.ipynb                # catalogue exploration
+│   ├── 02_embedding_tuning.ipynb   # similarity threshold tuning
+│   └── 03_evaluation.ipynb         # metric walkthroughs, error analysis
+│
+├── tests/
+│   ├── test_clustering.py
+│   ├── test_rules.py
+│   └── test_pipeline.py
+│
+├── docs/
+│   ├── architecture.md             # system design + diagram
+│   └── results.md                  # benchmark writeup, sample outputs
+│
+├── scripts/
+│   ├── build_index.py              # one-shot: catalogue → FAISS index
+│   └── run_evaluation.py           # one-shot: reproduce benchmark numbers
+│
+├── .gitignore
+├── LICENSE
+├── pyproject.toml                  # packaging + dependency management
+├── requirements.txt
+└── README.md
 
 ---
 
