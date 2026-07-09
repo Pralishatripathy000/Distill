@@ -95,6 +95,9 @@ streamlit run app.py
 
 ---
 
+## Project Structure
+
+```
 distill/
 ├── .github/
 │   └── workflows/
@@ -160,7 +163,7 @@ distill/
 ├── pyproject.toml                  # packaging + dependency management
 ├── requirements.txt
 └── README.md
-
+```
 ---
 
 ## Why This Exists
