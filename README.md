@@ -47,10 +47,12 @@ A Streamlit app lets you select or upload a catalogue slice and see flagged clus
 | Embeddings | sentence-transformers |
 | Similarity search | FAISS |
 | Vector store (RAG) | ChromaDB |
-| Generation | Groq API (LLaMA 3.3 70B) |
+| Generation | Groq API (`qwen/qwen3.6-27b`, fallback `openai/gpt-oss-120b`) |
 | Evaluation | scikit-learn |
 | Demo | Streamlit |
 | Model hosting | HuggingFace Hub |
+
+
 
 ---
 
